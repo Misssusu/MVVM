@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM</title>
+</head>
+<body>
+    <div id="app">
+        <h1>this is mvvm page</h1>
+        <input type="text" v-model="obj.name">
+        <h2>{{obj.name}}</h2>
+        <h2>{{message}}</h2>
+        <h2>{{tipMsg}}</h2>
+        <button v-on="addNum">+</button>
+        <span>{{num}}</span>
+<!--        <h3>{{tipMsg}}</h3>-->
+        <div class="container">
+            <p>这是一段文字</p>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<!--<script src="./main.js"></script>-->
+<script src="./index.js"></script>
+<!--<script src="./complie.js"></script>-->
+<!--<script src="./mvvm.js"></script>-->
+<script>
+    // import MVVM from './mvvm.js'
+    // console.log(MVVM);
+    // var vm = new MVVM({
+    //     el: '#app',
+    //     data() {
+    //         return {
+    //             message: 'hello'
+    //         }
+    //     }
+    // })
+</script>
+</html>
