@@ -6,6 +6,7 @@ class MVVM {
         this.$el = options.el;
         this.$data = options.data();
         this.computed = options.computed;
+        this.methods = options.methods;
         // 如果有data才进行数据劫持
         if(this.$data) {
             new Observer(this.$data)
@@ -13,6 +14,7 @@ class MVVM {
             //1.遍历computed的属性
             //2. 将computed的属性通过Object.defineProperty依次添加到vm上，在访问的时候调用属性对应的方法从而获取到值
             this.addComputed(this.computed)
+            this.addMethods(this.methods)
             // vm代理
             console.log(this.$data);
             this.proxyVm(this.$data)
@@ -41,6 +43,17 @@ class MVVM {
                 enumerable: true,   //可枚举
                 get:() => {
                     return computed[key].call(this)
+                }
+            })
+        }
+    }
+    addMethods(methods) {
+        console.log(methods);
+        for(let key in methods) {
+            Object.defineProperty(this.$data, key, {
+                enumerable: true,
+                get() {
+                    return methods[key]
                 }
             })
         }

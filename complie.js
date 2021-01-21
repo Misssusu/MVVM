@@ -38,8 +38,9 @@ class Complie {
             // 判断属性名字是否包含'v-'
             if(this.isDirective(attrName)){
                 let expr = attr.value;  //?
-                let [, directive] = attrName.split('-')
-                this.ComplieUtil[directive](node, this.vm, expr)
+                let [, directive] = attrName.split('-')  // v-model
+                let [directiveName, eventName] = directive.split(':')   //  v-on:click
+                this.ComplieUtil[directiveName](node, this.vm, expr, eventName)
             }
         })
 
@@ -105,17 +106,13 @@ class Complie {
             })
             updateFn && updateFn(node, this.getVal(vm, expr))
             node.addEventListener('input',(e)=>{
-                console.log('input event');
                 let value = e.target.value;
                 this.setVal(vm, expr, value)
             })
         },
-        on(node, vm, expr) {
-            console.log(expr);
-            let fn = this.getVal(vm, expr)
-            console.log(fn);
-            node.addEventListener('click', (e)=>{
-              fn(e)
+        on(node, vm, expr, eventName) {
+            node.addEventListener(eventName, (e)=>{
+                vm[expr].call(vm, e)
             })
         },
         updater: {

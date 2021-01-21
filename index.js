@@ -21,6 +21,7 @@ window.vm = new MVVM({
     methods: {
         addNum(e) {
             console.log(e);
+            console.log(this.num);
             return this.num++
         }
     }
